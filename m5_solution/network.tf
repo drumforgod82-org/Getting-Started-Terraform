@@ -52,6 +52,15 @@ resource "aws_subnet" "public_subnet2" {
   tags = local.common_tags
 }
 
+resource "aws_subnet" "public_subnet2" {
+  cidr_block              = var.vpc_public_subnets_cidr_block[1]
+  vpc_id                  = aws_vpc.app.id
+  availability_zone       = data.aws_availability_zones.available.names[1]
+  map_public_ip_on_launch = var.map_public_ip_on_launch
+
+  tags = local.common_tags
+}
+
 # ROUTING #
 resource "aws_route_table" "app" {
   vpc_id = aws_vpc.app.id
